@@ -58,6 +58,7 @@ create_xcframework() {
 build_make_xcframework_tool() {
     echo "Build ${GREEN}xcframework-maker${NC}.."
     (cd "xcframework-maker" && swift build -c release)
+    echo ""
 }
 
 make_xcframework() {
@@ -82,6 +83,13 @@ rm -rf "$OUTPUT_PATH"
 
 build_make_xcframework_tool
 
+FRAMEWORK_TARGETS="MLImage MLKitBarcodeScanning MLKitCommon MLKitVision"
+
+for TARGET_NAME in $FRAMEWORK_TARGETS
+do
+    make_xcframework $TARGET_NAME
+done
+
 SOURCE_TARGETS="GoogleToolboxForMac GoogleUtilitiesComponents Protobuf"
 
 for TARGET_NAME in $SOURCE_TARGETS
@@ -90,16 +98,9 @@ do
     create_xcframework $TARGET_NAME
 done
 
-FRAMEWORK_TARGETS="MLImage MLKitBarcodeScanning MLKitCommon MLKitVision"
+echo "\nZip xcframeworks and generate SHA256...\n"
 
-for TARGET_NAME in $FRAMEWORK_TARGETS
-do
-    make_xcframework $TARGET_NAME
-done
-
-echo "Zip xcframeworks and generate SHA256...\n"
-
-ALL_TARGETS="$SOURCE_TARGETS $FRAMEWORK_TARGETS"
+ALL_TARGETS="$FRAMEWORK_TARGETS $SOURCE_TARGETS"
 
 for TARGET_NAME in $ALL_TARGETS
 do
