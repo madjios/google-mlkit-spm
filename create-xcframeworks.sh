@@ -5,8 +5,8 @@ CYAN='\033[0;36m'
 WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
-ARCHIVE_PATH="archives"
-OUTPUT_PATH="xcframeworks_output"
+ARCHIVE_PATH="build/archives"
+OUTPUT_PATH="build/outputs"
 
 build_framework() {
     TARGET_NAME="$1"
@@ -69,6 +69,14 @@ make_xcframework() {
     $MAKE_XCFRAMEWORK_PATH -ios "Pods/$TARGET_NAME/Frameworks/$TARGET_NAME.framework" -output "$OUTPUT_PATH/"
 }
 
+zip_xcframework() {
+    TARGET_NAME="$1"
+
+    zip "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip" "$OUTPUT_PATH/$TARGET_NAME.xcframework"
+    shasum -a 256 "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip"
+    echo ""
+}
+
 rm -rf "$ARCHIVE_PATH"
 rm -rf "$OUTPUT_PATH"
 
@@ -87,4 +95,13 @@ FRAMEWORK_TARGETS="MLImage MLKitBarcodeScanning MLKitCommon MLKitVision"
 for TARGET_NAME in $FRAMEWORK_TARGETS
 do
     make_xcframework $TARGET_NAME
+done
+
+echo "Zip xcframeworks and generate SHA256...\n"
+
+ALL_TARGETS="$SOURCE_TARGETS $FRAMEWORK_TARGETS"
+
+for TARGET_NAME in $ALL_TARGETS
+do
+    zip_xcframework $TARGET_NAME
 done
