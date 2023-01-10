@@ -74,16 +74,18 @@ zip_xcframework() {
     TARGET_NAME="$1"
 
     zip -r "$TARGET_NAME.xcframework.zip" "$TARGET_NAME.xcframework" > /dev/null
-    shasum -a 256 "$TARGET_NAME.xcframework.zip"
+    echo "Checksum: ${GREEN}$TARGET_NAME${NC}"
+    swift package compute-checksum "$TARGET_NAME.xcframework.zip"
     echo ""
 }
+
+FRAMEWORK_TARGETS="MLImage MLKitBarcodeScanning MLKitCommon MLKitVision"
+SOURCE_TARGETS="GoogleToolboxForMac GoogleUtilitiesComponents Protobuf"
 
 rm -rf "$ARCHIVE_PATH"
 rm -rf "$OUTPUT_PATH"
 
 build_make_xcframework_tool
-
-FRAMEWORK_TARGETS="MLImage MLKitBarcodeScanning MLKitCommon MLKitVision"
 
 for TARGET_NAME in $FRAMEWORK_TARGETS
 do
@@ -91,8 +93,6 @@ do
 done
 
 echo "\nBuild source-based frameworks...\n"
-
-SOURCE_TARGETS="GoogleToolboxForMac GoogleUtilitiesComponents Protobuf"
 
 for TARGET_NAME in $SOURCE_TARGETS
 do
