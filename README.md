@@ -7,7 +7,7 @@
 ### Clone repo includes submodule:
 
 ```sh
-$ git clone --recurse-submodules https://git.dktsoft.com:2008/sapo-mobile/google-mlkit-spm.git
+$ git clone --recurse-submodules <repo_url>
 ```
 
 ### Install Google MLKit pods (using bundler or global `pod`)
@@ -31,3 +31,4 @@ $ ./create-xcframeworks.sh
 ### Create a new release
 - Update `Package.swift` to change `.binaryTarget` url paths and checksums
 - Create new release and attach xcframework zips to the release
+- If your git hosting service does not provide release attachments, then you can upload zips somewhere and use those urls instead.
