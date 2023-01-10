@@ -73,8 +73,8 @@ make_xcframework() {
 zip_xcframework() {
     TARGET_NAME="$1"
 
-    zip -r "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip" "$OUTPUT_PATH/$TARGET_NAME.xcframework" > /dev/null
-    shasum -a 256 "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip"
+    zip -r "$TARGET_NAME.xcframework.zip" "$TARGET_NAME.xcframework" > /dev/null
+    shasum -a 256 "$TARGET_NAME.xcframework.zip"
     echo ""
 }
 
@@ -106,5 +106,5 @@ ALL_TARGETS="$FRAMEWORK_TARGETS $SOURCE_TARGETS"
 
 for TARGET_NAME in $ALL_TARGETS
 do
-    zip_xcframework $TARGET_NAME
+    (cd "$OUTPUT_PATH" && zip_xcframework $TARGET_NAME)
 done
