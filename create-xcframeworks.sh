@@ -73,7 +73,7 @@ make_xcframework() {
 zip_xcframework() {
     TARGET_NAME="$1"
 
-    zip "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip" "$OUTPUT_PATH/$TARGET_NAME.xcframework"
+    zip -r "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip" "$OUTPUT_PATH/$TARGET_NAME.xcframework" > /dev/null
     shasum -a 256 "$OUTPUT_PATH/$TARGET_NAME.xcframework.zip"
     echo ""
 }
@@ -90,6 +90,8 @@ do
     make_xcframework $TARGET_NAME
 done
 
+echo "\nBuild source-based frameworks...\n"
+
 SOURCE_TARGETS="GoogleToolboxForMac GoogleUtilitiesComponents Protobuf"
 
 for TARGET_NAME in $SOURCE_TARGETS
@@ -98,7 +100,7 @@ do
     create_xcframework $TARGET_NAME
 done
 
-echo "\nZip xcframeworks and generate SHA256...\n"
+echo "Zip xcframeworks and generate SHA256...\n"
 
 ALL_TARGETS="$FRAMEWORK_TARGETS $SOURCE_TARGETS"
 
