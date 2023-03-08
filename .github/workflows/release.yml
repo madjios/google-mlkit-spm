@@ -2,6 +2,8 @@ name: Ruby Gem
 
 on:
   push:
+    branches:
+      - "main"
     paths:
       - "target-version.txt"
 
@@ -33,7 +35,8 @@ jobs:
     - name: Create xcframeworks
       run: sh ./scripts/create-xcframeworks.sh
 
-    - name: Update Package.swift
+    - name: Release new version
+      id: release_new_version
       run: |
         export TARGET_VERSION=$(cat target-version.txt)
 
