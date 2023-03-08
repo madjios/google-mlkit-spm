@@ -12,13 +12,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: true
+        
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+
+    - name: Cache CocoaPods
+      uses: actions/cache@v3
+      with:
+        key: ${{ hashFiles('Podfile.lock') }}
+        path:
+          "Pods"
         
     - name: Install pods
       run: bundle exec pod update
       
     - name: Create xcframeworks
-      run: sh -c create-xcframeworks.sh
+      run: sh ./create-xcframeworks.sh
