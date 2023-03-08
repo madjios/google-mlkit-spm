@@ -1,0 +1,56 @@
+name: Ruby Gem
+
+on:
+  push:
+    paths:
+      - "target-version.txt"
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+        
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Cache CocoaPods
+      uses: actions/cache@v3
+      with:
+        key: ${{ hashFiles('Podfile.lock') }}
+        path:
+          "Pods"
+        
+    - name: Install pods
+      run: bundle exec pod update
+      
+    - name: Create xcframeworks
+      run: sh ./scripts/create-xcframeworks.sh
+
+    - name: Update Package.swift
+      run: |
+        export TARGET_VERSION=$(cat target-version.txt)
+
+        sh ./scripts/update-package-swift.sh
+        
+        git add Package.swift
+        git commit -m "Update Package.swift to new release ($TARGET_VERSION)"
+        git tag $TARGET_VERSION
+        git push && git push --tags
+
+        echo "TARGET_VERSION=$TARGET_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/outputs/*.xcframework.zip
+        tag: ${{ steps.release_new_version.outputs.TARGET_VERSION }}
+        overwrite: true
+        file_glob: true

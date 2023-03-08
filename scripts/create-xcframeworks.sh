@@ -75,7 +75,7 @@ zip_xcframework() {
 
     zip -r "$TARGET_NAME.xcframework.zip" "$TARGET_NAME.xcframework" > /dev/null
     echo "Checksum: ${GREEN}$TARGET_NAME${NC}"
-    swift package compute-checksum "$TARGET_NAME.xcframework.zip"
+    swift package compute-checksum "$TARGET_NAME.xcframework.zip" | tee "$TARGET_NAME.xcframework.zip.shasum"
     echo ""
 }
 

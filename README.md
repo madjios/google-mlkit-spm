@@ -4,6 +4,13 @@
 
 # Instructions
 
+## Auto from GitHub actions:
+Just update `target-version.txt` and push new changes, GitHub action will run and create new release with attached xcframeworks.
+
+View `.github/workflows/release.yml` for more information.
+
+## Manual
+
 ### Clone repo includes submodule:
 
 ```sh
@@ -20,7 +27,7 @@ $ bundle exec pod install
 ### Run script to build and create xcframeworks
 
 ```sh
-$ ./create-xcframeworks.sh
+$ ./scripts/create-xcframeworks.sh
 ```
 
 > This script will:
