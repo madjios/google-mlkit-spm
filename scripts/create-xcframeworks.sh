@@ -8,13 +8,15 @@ NC='\033[0m' # No Color
 ARCHIVE_PATH="build/archives"
 OUTPUT_PATH="build/outputs"
 
+PODS_ROOT="PodsProject/Pods"
+
 build_framework() {
     TARGET_NAME="$1"
 
     echo "Archiving ios target: ${GREEN}$TARGET_NAME${NC}.."
 
     xcodebuild archive \
-        -project Pods/Pods.xcodeproj \
+        -project $PODS_ROOT/Pods.xcodeproj \
         -scheme "$TARGET_NAME" \
         -configuration Release \
         -destination 'generic/platform=iOS' \
@@ -26,7 +28,7 @@ build_framework() {
     echo "Archiving iphonesimulator target: ${GREEN}$TARGET_NAME${NC}.."
 
     xcodebuild archive \
-        -project Pods/Pods.xcodeproj \
+        -project $PODS_ROOT/Pods.xcodeproj \
         -scheme "$TARGET_NAME" \
         -configuration Release \
         -destination 'generic/platform=iOS Simulator' \
@@ -67,7 +69,7 @@ make_xcframework() {
     MAKE_XCFRAMEWORK_PATH="./xcframework-maker/.build/release/make-xcframework"
 
     echo "Make xcframework for target: ${GREEN}$TARGET_NAME${NC}.."
-    $MAKE_XCFRAMEWORK_PATH -ios "Pods/$TARGET_NAME/Frameworks/$TARGET_NAME.framework" -output "$OUTPUT_PATH/"
+    $MAKE_XCFRAMEWORK_PATH -ios "$PODS_ROOT/$TARGET_NAME/Frameworks/$TARGET_NAME.framework" -output "$OUTPUT_PATH/"
 }
 
 zip_xcframework() {

@@ -26,12 +26,12 @@ jobs:
     - name: Cache CocoaPods
       uses: actions/cache@v3
       with:
-        key: ${{ hashFiles('Podfile.lock') }}
+        key: ${{ hashFiles('PodsProject/Podfile.lock') }}
         path:
-          "Pods"
+          "PodsProject/Pods"
         
     - name: Install pods
-      run: bundle exec pod update
+      run: cd PodsProject && bundle exec pod update
       
     - name: Create xcframeworks
       run: sh ./scripts/create-xcframeworks.sh

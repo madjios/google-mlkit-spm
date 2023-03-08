@@ -21,7 +21,7 @@ $ git clone --recurse-submodules <repo_url>
 
 ```sh
 $ bundle install
-$ bundle exec pod install
+$ (cd PodsProject && bundle exec pod install)
 ```
 
 ### Run script to build and create xcframeworks
