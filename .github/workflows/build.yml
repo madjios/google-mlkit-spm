@@ -1,0 +1,24 @@
+name: Ruby Gem
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        bundler-cache: true
+        
+    - name: Install pods
+      run: bundle exec pod update
+      
+    - name: Create xcframeworks
+      run: sh -c create-xcframeworks.sh
