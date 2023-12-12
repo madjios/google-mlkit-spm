@@ -9,6 +9,14 @@ let package = Package(
         .library(
             name: "MLKitBarcodeScanning",
             targets: ["MLKitBarcodeScanning", "MLImage", "MLKitVision", "Common"]
+        ),
+        .library(
+            name: "MLKitTextRecognition",
+            targets: ["MLImage", "MLKitVision", "Common"]
+        ),
+        .library(
+            name: "MLKitFaceDetection", 
+            targets: ["MLImage", "MLKitVision", "Common"]
         )
     ],
     dependencies: [
