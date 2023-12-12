@@ -16,6 +16,8 @@ target 'MLKitSPM' do
   # Pods for MLKitSPM
 
   pod 'GoogleMLKit/BarcodeScanning', '~> 3.2.0'
+  pod 'GoogleMLKit/FaceDetection'
+  pod 'GoogleMLKit/TextRecognition'
 
 end
 
