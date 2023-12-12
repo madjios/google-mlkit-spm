@@ -12,11 +12,11 @@ let package = Package(
         ),
         .library(
             name: "MLKitTextRecognition",
-            targets: ["MLImage", "MLKitVision", "Common"]
+            targets: ["MLKitTextRecognition", "MLImage", "MLKitVision", "Common"]
         ),
         .library(
             name: "MLKitFaceDetection", 
-            targets: ["MLImage", "MLKitVision", "Common"]
+            targets: ["MLKitFaceDetection", "MLImage", "MLKitVision", "Common"]
         )
     ],
     dependencies: [
