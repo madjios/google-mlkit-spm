@@ -12,11 +12,11 @@ let package = Package(
         ),
         .library(
             name: "MLKitTextRecognition",
-            targets: ["MLKitTextRecognition", "MLImage", "MLKitVision", "Common"]
+            targets: ["MLImage", "MLKitVision", "Common"]
         ),
         .library(
-            name: "MLKitFaceDetection",
-            targets: ["MLKitFaceDetection", "MLImage", "MLKitVision", "Common"]
+            name: "MLKitFaceDetection", 
+            targets: ["MLImage", "MLKitVision", "Common"]
         )
     ],
     dependencies: [
@@ -28,13 +28,13 @@ let package = Package(
     ],
     targets: [
         // these binaryTarget will be overriden when GitHub actions run, so do not edit
-        .binaryTarget(name: "MLImage", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLImage.xcframework.zip", checksum: "0764ee131340a2cef0cc968e6e4bfce4c50154fedec4a085cbbeee63f5c0c588"),
-        .binaryTarget(name: "MLKitBarcodeScanning", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitBarcodeScanning.xcframework.zip", checksum: "a3f52e3cb9ae11d68cf79459b8dc57e5c3818dd57622b3c1bf4a5491e0889891"),
-        .binaryTarget(name: "MLKitCommon", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitCommon.xcframework.zip", checksum: "4eac91a37e5730f7b7d1b7ce0acd8bacc0fed8910ac3b3ab28681c65b3cc3d7f"),
-        .binaryTarget(name: "MLKitVision", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitVision.xcframework.zip", checksum: "55a833740417dbd8d7cdb9ff595fc44eea802e4a70c67a21745a6d469b4e8f62"),
-        .binaryTarget(name: "GoogleToolboxForMac", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/GoogleToolboxForMac.xcframework.zip", checksum: "48ac6c3086ddf18444570543152902d924b1b121c7564cbc0cdb87d200f355c8"),
-        .binaryTarget(name: "GoogleUtilitiesComponents", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/GoogleUtilitiesComponents.xcframework.zip", checksum: "a93d45f9d6b9f6c4abe12543da6ede80f8b184f2a99200e211e01b82007ccf52"),
-        .binaryTarget(name: "Protobuf", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/Protobuf.xcframework.zip", checksum: "ff4d3e859afd5cdd863e9e13fcad8c8f31e14b9658fe9f79a27402ac6c00d8aa"),
+        .binaryTarget(name: "MLImage", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLImage.xcframework.zip", checksum: "7b135225ef34e5c8f0d525fc8ea964ce7caab5c50d9b73eb8f80cd9106199331"),
+        .binaryTarget(name: "MLKitBarcodeScanning", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitBarcodeScanning.xcframework.zip", checksum: "7d4f513f7538d7d4fa64861b9adb31eaa13c78d664e8bf2f919cd88a504eb3d8"),
+        .binaryTarget(name: "MLKitCommon", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitCommon.xcframework.zip", checksum: "a765d833bb2454715b99804bb6ce760221d3a88a221b76e72f501865c1df0854"),
+        .binaryTarget(name: "MLKitVision", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/MLKitVision.xcframework.zip", checksum: "8690bc2476ae37804d06d9422f71812b4a572be7940aada35421c644e5a21697"),
+        .binaryTarget(name: "GoogleToolboxForMac", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/GoogleToolboxForMac.xcframework.zip", checksum: "1d592b9b0413a935cf2e8b49fda90e4692fc5706f53ade1eee9e0776532d1b50"),
+        .binaryTarget(name: "GoogleUtilitiesComponents", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/GoogleUtilitiesComponents.xcframework.zip", checksum: "fbe02e03ee8b1c3a51fdc954d0ba7dead5b8d68125372af72ceea26586764bbc"),
+        .binaryTarget(name: "Protobuf", url: "https://github.com/kientux/google-mlkit-spm/releases/download/0.0.2/Protobuf.xcframework.zip", checksum: "f8398df25b3ad9a29e83de13f2ad691fcf33bf6c57681791aac773de8b78ce5e"),
         .target(
             name: "Common",
             dependencies: [
